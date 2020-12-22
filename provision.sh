@@ -20,6 +20,8 @@ echo --- start service ---
 sudo systemctl daemon-reload
 sudo systemctl start demoapp.service
 
+sudo journalctl -u demoapp | grep password
+
 echo --- ssl certificate ---
 
 echo --- restart apache ---
