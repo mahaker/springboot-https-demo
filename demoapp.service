@@ -1,0 +1,12 @@
+[Unit]
+Description=Spring Boot Demo App
+Documentation=https://github.com/mahaker/springboot-https-demo
+
+[Service]
+ExecStart=java -jar /vagrant/build/libs/demo-0.0.1-SNAPSHOT.jar
+StandardOutput=journal
+StandardError=journal
+OOMPolicy=stop
+
+[Install]
+WantedBy=multi-user.target
