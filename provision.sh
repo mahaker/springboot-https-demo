@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
-echo --- install jdk ---
-# yum -y install java-11-openjdk java-11-openjdk-devel
-# export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
-# export PATH=\$PATH:\$JAVA_HOME/bin 
+if ! command -v java
+then
+  echo --- install jdk ---
+  yum -y install java-11-openjdk java-11-openjdk-devel
+  export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
+  export PATH=$PATH:$JAVA_HOME/bin 
+fi
 
-echo --- disable firewalld ---
-sudo systemctl stop firewalld
+echo --- setup firewalld ---
+systemctl start firewalld
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
+firewall-cmd --reload
 
 echo --- register service ---
 cp /vagrant/demoapp.service /etc/systemd/system
 
 echo --- start service ---
-systemctl daemon-reload
-systemctl start demoapp.service
+sudo systemctl daemon-reload
+sudo systemctl start demoapp.service
 
 echo --- ssl certificate ---
 
