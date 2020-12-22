@@ -14,7 +14,7 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --reload
 
 echo --- register service ---
-cp /vagrant/demoapp.service /etc/systemd/system
+cp /vagrant/app/demoapp.service /etc/systemd/system
 
 echo --- start service ---
 sudo systemctl daemon-reload
