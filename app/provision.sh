@@ -10,7 +10,8 @@ fi
 
 echo --- setup firewalld ---
 systemctl start firewalld
-firewall-cmd --zone=public --add-port=8080/tcp --permanent
+firewall-cmd --zone=public --add-port=8443/tcp --permanent
+firewall-cmd --zone=public --add-service=https --permanent
 firewall-cmd --reload
 
 echo --- register service ---
@@ -23,5 +24,5 @@ sudo systemctl start demoapp.service
 sudo journalctl -u demoapp | grep password
 
 echo --- ssl certificate ---
-
-echo --- restart apache ---
+# keytoolコマンドはホストPCで実行
+# keytool -genkeypair -alias demoappkey -keysize 2048 -keyalg RSA -storetype PKCS12 -keystore demoapp.p12 -validity 3650 -keypasswd password001
