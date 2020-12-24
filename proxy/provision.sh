@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 echo --- apache configuration ---
-yum -y install httpd
-# rm -rf /etc/httpd/conf.d/
-# cp /vagrant/proxy/httpd.conf /etc/httpd/conf/
+if ! command -v httpd
+then
+  echo --- install httpd ---
+  yum -y install httpd
+fi
 sudo systemctl enable httpd.service
 sudo systemctl start httpd.service
 
