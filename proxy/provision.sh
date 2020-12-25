@@ -9,6 +9,10 @@ fi
 sudo systemctl enable httpd.service
 sudo systemctl start httpd.service
 
-# echo --- setup firewalld ---
+echo --- setup testpage ---
+mkdir -p /var/www/html/test
+cp -r /vagrant/proxy/test/* /var/www/html/test
+
+echo --- setup firewalld ---
 sudo systemctl stop firewalld
 setenforce 0
