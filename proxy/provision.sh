@@ -6,6 +6,8 @@ then
   echo --- install httpd ---
   yum -y install httpd
 fi
+rm /etc/httpd/conf/httpd.conf
+cp /vagrant/proxy/httpd.conf /etc/httpd/conf
 sudo systemctl enable httpd.service
 sudo systemctl start httpd.service
 
