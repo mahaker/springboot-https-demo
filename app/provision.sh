@@ -8,11 +8,26 @@ then
   export PATH=$PATH:$JAVA_HOME/bin 
 fi
 
+echo --- install nginx ---
+sudo yum -y install nginx
+rm /etc/nginx/default.d/app.conf /etc/nginx/nginx.conf
+cp /vagrant/app/app.conf /etc/nginx/default.d
+cp /vagrant/app/nginx.conf /etc/nginx
+mkdir -p /etc/nginx/keys
+cp /vagrant/app/dhparam.pem /etc/nginx/keys
+cp /vagrant/app/server.crt /etc/nginx/keys
+cp /vagrant/app/server.key /etc/nginx/keys
+sudo systemctl enable nginx
+sudo systemctl start nginx
+
 echo --- setup firewalld ---
-systemctl start firewalld
-firewall-cmd --zone=public --add-port=8443/tcp --permanent
-firewall-cmd --zone=public --add-service=https --permanent
-firewall-cmd --reload
+systemctl stop firewalld
+setenforce 0
+# systemctl start firewalld
+# firewall-cmd --zone=public --add-port=443/tcp --permanent
+# firewall-cmd --zone=public --add-port=8443/tcp --permanent
+# firewall-cmd --zone=public  --add-service=https --permanent
+# firewall-cmd --reload
 
 echo --- register service ---
 cp /vagrant/app/demoapp.service /etc/systemd/system
@@ -22,7 +37,3 @@ sudo systemctl daemon-reload
 sudo systemctl start demoapp.service
 
 sudo journalctl -u demoapp | grep password
-
-echo --- ssl certificate ---
-# keytoolコマンドはホストPCで実行
-# keytool -genkeypair -alias demoappkey -keysize 2048 -keyalg RSA -storetype PKCS12 -keystore demoapp.p12 -validity 3650 -keypasswd password001
