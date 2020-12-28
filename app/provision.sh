@@ -10,8 +10,8 @@ fi
 
 echo --- install nginx ---
 sudo yum -y install nginx
-rm /etc/nginx/default.d/app.conf /etc/nginx/nginx.conf
-cp /vagrant/app/app.conf /etc/nginx/default.d
+rm /etc/nginx/conf.d/app.conf /etc/nginx/nginx.conf
+cp /vagrant/app/app.conf /etc/nginx/conf.d
 cp /vagrant/app/nginx.conf /etc/nginx
 mkdir -p /etc/nginx/keys
 cp /vagrant/app/dhparam.pem /etc/nginx/keys

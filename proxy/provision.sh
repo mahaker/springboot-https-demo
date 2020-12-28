@@ -17,6 +17,7 @@ cp /vagrant/proxy/server.key /etc/httpd/keys
 mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.org
 sudo systemctl enable httpd.service
 sudo systemctl start httpd.service
+sudo systemctl restart httpd.service
 
 echo --- setup testpage ---
 mkdir -p /var/www/html/test
