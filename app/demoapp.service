@@ -3,7 +3,11 @@ Description=Spring Boot Demo App
 Documentation=https://github.com/mahaker/springboot-https-demo
 
 [Service]
-ExecStart=java -jar /vagrant/app/exec.jar --server.port=8443 --spring.flyway.enabled=false
+ExecStart=java -jar /vagrant/app/exec.jar \
+  --server.port=8443 --spring.flyway.enabled=false \
+  --spring.datasource.url=jdbc:postgresql://localhost:5432/mydb \
+  --spring.datasource.username=user123 \
+  --spring.datasource.password=user123_password
 StandardOutput=journal
 StandardError=journal
 OOMPolicy=stop
