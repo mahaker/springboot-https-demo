@@ -19,6 +19,7 @@ cp /vagrant/app/server.crt /etc/nginx/keys
 cp /vagrant/app/server.key /etc/nginx/keys
 sudo systemctl enable nginx
 sudo systemctl start nginx
+sudo systemctl restart nginx
 
 echo --- setup postgres ---
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
@@ -27,6 +28,7 @@ sudo dnf install -y postgresql10-server
 sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
 sudo systemctl enable postgresql-10
 sudo systemctl start postgresql-10
+sudo systemctl restart postgresql-10
 sudo su - -c 'psql -U postgres -f /vagrant/app/init.sql' postgres
 sudo su - -c 'psql -U postgres -d mydb -f /vagrant/app/tables.sql' postgres
 
