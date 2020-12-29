@@ -5,6 +5,7 @@ echo --- apache configuration ---
 # then
   echo --- install httpd ---
   yum -y install httpd
+  yum -y install mod_proxy_html
   yum -y install mod_ssl
 # fi
 rm /etc/httpd/conf/httpd.conf
