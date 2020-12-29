@@ -30,7 +30,11 @@ sudo systemctl enable postgresql-10
 sudo systemctl start postgresql-10
 sudo systemctl restart postgresql-10
 sudo su - -c 'psql -U postgres -f /vagrant/app/init.sql' postgres
-sudo su - -c 'psql -U postgres -d mydb -f /vagrant/app/tables.sql' postgres
+sudo cp /vagrant/app/pg_hba.conf /var/lib/pgsql/10/data
+sudo systemctl restart postgresql-10
+export PGPASSWORD=user123_password
+psql -U user123 -d mydb -f /vagrant/app/tables.sql
+export PGPASSWORD=
 
 echo --- setup firewalld ---
 systemctl stop firewalld
