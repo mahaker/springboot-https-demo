@@ -47,5 +47,6 @@ cp /vagrant/app/demoapp.service /etc/systemd/system
 echo --- start service ---
 sudo systemctl daemon-reload
 sudo systemctl start demoapp.service
+sudo systemctl restart demoapp.service
 
 sudo journalctl -u demoapp | grep password
