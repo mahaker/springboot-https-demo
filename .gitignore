@@ -41,6 +41,7 @@ out/
 *.crt
 *.key
 exec.jar
-migrations/
 data.sql
 tables.sql
+images/
+application*.yml
