@@ -34,6 +34,7 @@ sudo cp /vagrant/app/pg_hba.conf /var/lib/pgsql/10/data
 sudo systemctl restart postgresql-10
 export PGPASSWORD=user123_password
 psql -U user123 -d mydb -f /vagrant/app/tables.sql
+psql -U user123 -d mydb -f /vagrant/app/data.sql
 export PGPASSWORD=
 
 echo --- setup firewalld ---
